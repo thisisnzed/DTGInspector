@@ -34,7 +34,7 @@ public class InspectorManager {
     }
 
     public void scan() {
-        //this.searchAt(TokenSearcher.class);
+        this.searchAt(TokenSearcher.class);
         this.searchAt(IndexSearcher.class);
         this.searchAt(WebhookSearcher.class);
         this.searchAt(PasswordSearcher.class);
