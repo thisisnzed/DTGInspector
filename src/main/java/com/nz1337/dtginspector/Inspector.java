@@ -34,5 +34,4 @@ public class Inspector {
     private double getDifference(long start, long end) {
         return Double.parseDouble(String.valueOf((end - start) / 1000));
     }
-
 }
