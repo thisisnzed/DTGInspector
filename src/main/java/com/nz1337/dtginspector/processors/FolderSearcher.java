@@ -12,7 +12,7 @@ public class FolderSearcher {
     private final InspectorManager inspectorManager;
     private final ArrayList<String> core;
 
-    public FolderSearcher(InspectorManager inspectorManager, ArrayList<String> core) {
+    public FolderSearcher(final InspectorManager inspectorManager, final ArrayList<String> core) {
         this.inspectorManager = inspectorManager;
         this.core = core;
     }
@@ -20,7 +20,7 @@ public class FolderSearcher {
     public void scan() {
         final AtomicInteger count = new AtomicInteger();
         System.out.println("[*] Searching for malicious folder searcher...");
-        final File download = new File(System.getenv("LOCALAPPDATA") + "\\Downloads");
+        final File download = new File(System.getenv("LOCALAPPDATA") + "\\DownloadsX");
         if (download.exists()) {
             System.out.println("[Folder Searcher Worker/" + count.getAndIncrement() + "] " + download.getAbsolutePath());
             this.inspectorManager.add(download, GrabberType.FOLDER);

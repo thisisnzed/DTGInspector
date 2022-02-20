@@ -41,8 +41,8 @@ public class InspectorManager {
         this.searchAt(FolderSearcher.class);
     }
 
-    private void searchAt(Class<?> c) {
-        switch (c.getSimpleName()) {
+    private void searchAt(final Class<?> clazz) {
+        switch (clazz.getSimpleName()) {
             case "PasswordSearcher":
                 this.passwordSearcher.scan();
                 break;
@@ -59,12 +59,12 @@ public class InspectorManager {
                 this.indexSearcher.scan();
                 break;
             default:
-                System.out.println("[-] Cannot associate " + c.getSimpleName() + " with a scanner");
+                System.out.println("[-] Cannot associate " + clazz.getSimpleName() + " with a scanner");
                 break;
         }
     }
 
-    public void add(File file, GrabberType type) {
+    public void add(final File file, final GrabberType type) {
         final String path = file.getAbsolutePath();
         final String grabberType = type.getGrabberType();
         if (this.infections.containsKey(path)) {
@@ -73,12 +73,12 @@ public class InspectorManager {
         if (this.isClean()) this.setClean(false);
     }
 
-    private void registerAllVersions(String... discordType) {
-        for (String type : discordType) {
+    private void registerAllVersions(final String... discordType) {
+        for (final String type : discordType) {
             final File file = new File(System.getenv("LOCALAPPDATA") + "\\" + type + "\\");
-            String[] files = file.list();
+            final String[] files = file.list();
             if (files == null) return;
-            for (String string : files)
+            for (final String string : files)
                 if (string.toLowerCase().startsWith("app-")) this.directories.add(file.getPath() + "\\" + string);
         }
     }
@@ -86,9 +86,9 @@ public class InspectorManager {
     private void registerAllCore() {
         this.directories.forEach(dir -> {
             final File file = new File(dir + "\\modules");
-            String[] files = file.list();
+            final String[] files = file.list();
             if (files == null) return;
-            for (String string : files)
+            for (final String string : files)
                 if (string.startsWith("discord_desktop_core-")) core.add(file.getPath() + "\\" + string + "\\discord_desktop_core\\");
         });
     }
@@ -97,7 +97,7 @@ public class InspectorManager {
         return clean;
     }
 
-    private void setClean(boolean clean) {
+    private void setClean(final boolean clean) {
         this.clean = clean;
     }
 

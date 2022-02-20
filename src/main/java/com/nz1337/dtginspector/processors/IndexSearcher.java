@@ -22,7 +22,7 @@ public class IndexSearcher {
     public void scan() {
         final AtomicInteger count = new AtomicInteger();
         System.out.println("[*] Searching for null index injection...");
-        directories.forEach(dir -> {
+        this.directories.forEach(dir -> {
             final File file = new File(dir + "\\index.js");
             if (file.exists()) {
                 System.out.println("[Index Searcher Worker/" + count.getAndIncrement() + "] " + file.getAbsolutePath());
@@ -34,14 +34,14 @@ public class IndexSearcher {
 
     private int getSize(File file) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            StringBuilder inputBuffer = new StringBuilder();
+            final BufferedReader reader = new BufferedReader(new FileReader(file));
+            final StringBuilder inputBuffer = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) inputBuffer.append(line);
             reader.close();
             return inputBuffer.toString().replaceAll("\n", "").length();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (final Exception exception) {
+            exception.printStackTrace();
         }
         return 40;
     }

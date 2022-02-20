@@ -17,7 +17,7 @@ public class TokenSearcher {
     private final ArrayList<String> directories;
     private final ArrayList<String> core;
 
-    public TokenSearcher(InspectorManager inspectorManager, ArrayList<String> core, ArrayList<String> directories) {
+    public TokenSearcher(final InspectorManager inspectorManager, final ArrayList<String> core, final ArrayList<String> directories) {
         this.inspectorManager = inspectorManager;
         this.directories = directories;
         this.core = core;
@@ -30,15 +30,15 @@ public class TokenSearcher {
             final File file = new File(dir + "\\index.js");
             if (file.exists()) {
                 System.out.println("[Token Searcher Worker/" + count.getAndIncrement() + "] " + file.getAbsolutePath());
-                if (Arrays.stream(illegalStrings).anyMatch(FileUtils.read(file)::contains))
+                if (Arrays.stream(this.illegalStrings).anyMatch(FileUtils.read(file)::contains))
                     this.inspectorManager.add(file, GrabberType.TOKEN);
             }
         });
-        directories.forEach(dir -> {
-            FileUtils.getAllFiles(new File(dir)).forEach(file -> {
-                if (Arrays.stream(extensions).anyMatch(ext -> file.getAbsolutePath().endsWith(ext))) {
+        this.directories.forEach(dir -> {
+            FileUtils.getAllFiles(new File(dir), true).forEach(file -> {
+                if (Arrays.stream(this.extensions).anyMatch(ext -> file.getAbsolutePath().endsWith(ext))) {
                     System.out.println("[Token Searcher Worker/" + count.getAndIncrement() + "] " + file.getAbsolutePath());
-                    if (Arrays.stream(illegalStrings).anyMatch(FileUtils.read(file)::contains))
+                    if (Arrays.stream(this.illegalStrings).anyMatch(FileUtils.read(file)::contains))
                         this.inspectorManager.add(file, GrabberType.TOKEN);
                 }
             });

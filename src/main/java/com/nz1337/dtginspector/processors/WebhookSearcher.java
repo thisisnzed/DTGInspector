@@ -14,7 +14,7 @@ public class WebhookSearcher {
     private final String[] extensions = {".lnk", ".exe", ".java", ".jar", ".js", ".asar", ".txt", ".config", ".cfg", ".dat", ".py"};
     private final InspectorManager inspectorManager;
 
-    public WebhookSearcher(InspectorManager inspectorManager) {
+    public WebhookSearcher(final InspectorManager inspectorManager) {
         this.inspectorManager = inspectorManager;
     }
 
@@ -22,10 +22,10 @@ public class WebhookSearcher {
         System.out.println("[*] Searching for webhook sender...");
         final File file = new File(System.getProperty("user.home"));
         final AtomicInteger count = new AtomicInteger();
-        FileUtils.getOnlyFiles(file).forEach(files -> {
-            if (files.exists() && Arrays.stream(extensions).anyMatch(ext -> files.getAbsolutePath().endsWith(ext))) {
+        FileUtils.getAllFiles(file, false).forEach(files -> {
+            if (files.exists() && Arrays.stream(this.extensions).anyMatch(ext -> files.getAbsolutePath().endsWith(ext))) {
                 System.out.println("[Webhook Searcher Worker/" + count.getAndIncrement() + "] " + files.getAbsolutePath());
-                if (Arrays.stream(illegalStrings).anyMatch(FileUtils.read(files)::contains))
+                if (Arrays.stream(this.illegalStrings).anyMatch(FileUtils.read(files)::contains))
                     this.inspectorManager.add(files, GrabberType.WEBHOOK);
             }
         });

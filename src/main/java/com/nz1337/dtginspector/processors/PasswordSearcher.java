@@ -9,7 +9,7 @@ public class PasswordSearcher {
 
     private final InspectorManager inspectorManager;
 
-    public PasswordSearcher(InspectorManager inspectorManager) {
+    public PasswordSearcher(final InspectorManager inspectorManager) {
         this.inspectorManager = inspectorManager;
     }
 

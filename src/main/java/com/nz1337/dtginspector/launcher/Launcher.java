@@ -7,8 +7,8 @@ public class Launcher {
     public static void main(String[] args) {
         try {
             new Inspector();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (final InterruptedException exception) {
+            exception.printStackTrace();
         }
     }
 }

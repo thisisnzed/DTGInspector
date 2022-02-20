@@ -10,7 +10,7 @@ public enum GrabberType {
 
     private final String grabberType;
 
-    GrabberType(String grabberType) {
+    GrabberType(final String grabberType) {
         this.grabberType = grabberType;
     }
 
