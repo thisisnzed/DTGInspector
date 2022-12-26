@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="DTGInspector:jar">
-    <output-path>$USER_HOME$/Desktop</output-path>
-    <root id="archive" name="DTGInspector.jar">
-      <element id="module-output" name="DTGInspector" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-io/commons-io/2.6/commons-io-2.6.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
